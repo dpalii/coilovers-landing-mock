@@ -1,4 +1,5 @@
 window.onload = () => {
+    const VIDEO_PLAYBACK_RATE = 0.75;
     const FRAME_TIME = 30;
     const OPACITY_TRANSITION = 'opacity ease-in-out 1s';
     const LONG_PAGE_TRANSITION = 'opacity ease-in-out 1s, top linear 8s';
@@ -8,7 +9,7 @@ window.onload = () => {
     const SCREEN_HEIGHT = 568;
     const LAST_PAGE = 5;
     const LONG_PAGES = [2, 3];
-    const infoData = [
+    const INFO_DATA = [
         ['./assets/page 1.png', './assets/page 1.mp4', '150px'],
         ['./assets/page 2.png', './assets/page 2.mp4', '400px'],
         ['./assets/page 2.png', './assets/page 2.mp4', '400px'],
@@ -35,6 +36,7 @@ window.onload = () => {
     let scrollTimeout = null;
     let rewindInterval = null;
     let rewindTimeout = null;
+    infoVideo.playbackRate = VIDEO_PLAYBACK_RATE;
 
     const switchPage = (newPage, newPosition) => {
         if (pageTimeout) {
@@ -56,7 +58,7 @@ window.onload = () => {
         contentBg.style.transition = OPACITY_TRANSITION;
         contentBg.style.opacity = '0';
         
-        if (infoData[page][0] !== infoImg.getAttribute('src')) {
+        if (INFO_DATA[page][0] !== infoImg.getAttribute('src')) {
             infoContainer.style.opacity = '0';
         }
 
@@ -69,8 +71,8 @@ window.onload = () => {
         }
         
         transitionTimeout = setTimeout(() => {
-            if (infoData[page][0] !== infoImg.getAttribute('src')) {
-                const [imgSrc, videoSrc, height] = infoData[page];
+            if (INFO_DATA[page][0] !== infoImg.getAttribute('src')) {
+                const [imgSrc, videoSrc, height] = INFO_DATA[page];
 
                 infoImg.setAttribute('src', imgSrc);
                 infoImg.style.height = height;
@@ -82,6 +84,7 @@ window.onload = () => {
                     infoVideoSource.setAttribute('src', videoSrc);
                     infoVideo.load();
                     infoVideo.play();
+                    infoVideo.playbackRate = VIDEO_PLAYBACK_RATE;
                 }
                 else {
                     infoVideo.style.display = 'none';
