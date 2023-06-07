@@ -1,11 +1,9 @@
 :root {
-    --phone-width: 369px;
-    --phone-height: 750px;
-    --content-width: 320px;
-    --content-height: 568px;
-    --heading-height: 56px;
-    --info-height: 300px;
-    --info-height-sm: 150px;
+    --phone-width: 355px;
+    --phone-height: 722px;
+    --content-width: 322px;
+    --content-height: 693px;
+    --status-bar-height: 25px;
     --phone-container-width: calc(var(--phone-width) + var(--padding) * 2);
     --padding: 100px;
 }
@@ -24,7 +22,7 @@ html, body {
     box-sizing: border-box;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .container {
@@ -84,27 +82,8 @@ html, body {
     width: 108px;
 }
 
-#info-container {
-    height: var(--content-height);
-    width: calc(100% - var(--phone-container-width));
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: end;
-    transition: opacity ease-in-out 1s;
-}
-
-#info-img {
-    box-sizing: border-box;
-    height: var(--info-height-sm);
-}
-
-#info-video {
-    height: var(--info-height-sm);
-}
-
 .phone {
+    z-index: 5;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -126,10 +105,11 @@ html, body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
 }
 
 .scroll-wrapper {
-    height: calc(var(--content-height) - var(--heading-height));
+    height: calc(var(--content-height) - var(--status-bar-height));
     position: relative;
     overflow: hidden;
 }
@@ -137,14 +117,14 @@ html, body {
 #scroll {
     z-index: 3;
     position: absolute;
-    top: calc(-1 * var(--heading-height));
+    top: calc(-1 * var(--status-bar-height));
     opacity: 1;
 }
 
 #scroll-bg {
     z-index: 1;
     position: absolute;
-    top: calc(-1 * var(--heading-height));
+    top: calc(-1 * var(--status-bar-height));
     opacity: 1;
 }
 
@@ -166,10 +146,8 @@ html, body {
     height: calc(1.2 * var(--content-height));
 }
 
-#heading {
-    opacity: 0;
-    transition: opacity ease-in-out 1s;
-    height: var(--heading-height);
+#status-bar {
+    height: var(--status-bar-height);
     position: relative;
     z-index: 4;
 }

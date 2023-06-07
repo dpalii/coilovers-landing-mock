@@ -1,30 +1,16 @@
 window.onload = () => {
-    const VIDEO_PLAYBACK_RATE = 0.75;
     const FRAME_TIME = 30;
     const OPACITY_TRANSITION = 'opacity ease-in-out 1s';
     const LONG_PAGE_TRANSITION = 'opacity ease-in-out 1s, top linear 8s';
     const PAGE_TIMER = 9000;
-    const INDENT_TOP = 56;
+    const INDENT_TOP = 25;
     const TRANSITION_TIMER = 1000;
-    const SCREEN_HEIGHT = 568;
+    const SCREEN_HEIGHT = 693;
     const LAST_PAGE = 5;
-    const LONG_PAGES = [2, 3];
-    const INFO_DATA = [
-        ['./assets/page 1.png', './assets/page 1.mp4', '150px'],
-        ['./assets/page 2.png', './assets/page 2.mp4', '400px'],
-        ['./assets/page 2.png', './assets/page 2.mp4', '400px'],
-        ['./assets/page 2.png', './assets/page 2.mp4', '400px'],
-        ['./assets/page 5.png', null, '400px'],
-        ['./assets/page 6.png', null, '400px']
-    ]
+    const LONG_PAGES = [3];
     const content = document.getElementById('scroll');
     const contentBg = document.getElementById('scroll-bg');
     const button = document.getElementById('button');
-    const heading = document.getElementById('heading');
-    const infoImg = document.getElementById('info-img');
-    const infoVideo = document.getElementById('info-video');
-    const infoVideoSource = document.getElementById('info-source');
-    const infoContainer = document.getElementById('info-container');
     const nextBtn = document.getElementById('next');
     const prevBtn = document.getElementById('prev');
     const restartBtn = document.getElementById('restart');
@@ -36,7 +22,6 @@ window.onload = () => {
     let scrollTimeout = null;
     let rewindInterval = null;
     let rewindTimeout = null;
-    infoVideo.playbackRate = VIDEO_PLAYBACK_RATE;
 
     const switchPage = (newPage, newPosition) => {
         if (pageTimeout) {
@@ -57,50 +42,19 @@ window.onload = () => {
         content.style.opacity = '0';
         contentBg.style.transition = OPACITY_TRANSITION;
         contentBg.style.opacity = '0';
-        
-        if (INFO_DATA[page][0] !== infoImg.getAttribute('src')) {
-            infoContainer.style.opacity = '0';
-        }
 
         if (page === LAST_PAGE) {
             button.style.opacity = '0';
         }
-
-        if (page === 0) {
-            heading.style.opacity = '0';
-        }
         
         transitionTimeout = setTimeout(() => {
-            if (INFO_DATA[page][0] !== infoImg.getAttribute('src')) {
-                const [imgSrc, videoSrc, height] = INFO_DATA[page];
-
-                infoImg.setAttribute('src', imgSrc);
-                infoImg.style.height = height;
-                infoVideo.style.height = height;
-
-                if (videoSrc) {
-                    infoVideo.pause();
-                    infoVideo.style.display = 'block';
-                    infoVideoSource.setAttribute('src', videoSrc);
-                    infoVideo.load();
-                    infoVideo.play();
-                    infoVideo.playbackRate = VIDEO_PLAYBACK_RATE;
-                }
-                else {
-                    infoVideo.style.display = 'none';
-                }
-            }
             content.style.top = `-${position}px`;
             content.style.opacity = '1';
             contentBg.style.top = `-${position}px`;
             contentBg.style.opacity = '1';
-            infoContainer.style.opacity = '1';
 
             if (page !== LAST_PAGE) {
                 button.style.opacity = '1';
-            }
-            if (page === 1) {
-                heading.style.opacity = '1';
             }
 
             if (LONG_PAGES.includes(page)) {
