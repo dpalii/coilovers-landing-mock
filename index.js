@@ -14,6 +14,7 @@ window.onload = () => {
     const nextBtn = document.getElementById('next');
     const prevBtn = document.getElementById('prev');
     const restartBtn = document.getElementById('restart');
+    const text = document.getElementById('text');
     
     let page = 0;
     let position = INDENT_TOP;
@@ -46,6 +47,10 @@ window.onload = () => {
         if (page === LAST_PAGE) {
             button.style.opacity = '0';
         }
+
+        if (page !== 0) {
+            text.style.opacity = '0';
+        }
         
         transitionTimeout = setTimeout(() => {
             content.style.top = `-${position}px`;
@@ -55,6 +60,12 @@ window.onload = () => {
 
             if (page !== LAST_PAGE) {
                 button.style.opacity = '1';
+            }
+
+            if (page === 0) {
+                text.style.opacity = '1';
+                text.currentTime = 0;
+                text.play();
             }
 
             if (LONG_PAGES.includes(page)) {
@@ -125,6 +136,7 @@ window.onload = () => {
         if (pageTimeout) {
             clearTimeout(pageTimeout);
         }
+        text.play();
         pageTimeout = setTimeout(() => switchPage(page + 1, getPosition(page + 1)), PAGE_TIMER);
     }
     

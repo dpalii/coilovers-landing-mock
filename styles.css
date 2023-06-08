@@ -1,10 +1,11 @@
 :root {
     --phone-width: 355px;
     --phone-height: 722px;
-    --content-width: 322px;
+    --content-width: 320px;
     --content-height: 693px;
     --status-bar-height: 25px;
     --phone-container-width: calc(var(--phone-width) + var(--padding) * 2);
+    --text-width: 310px; 
     --padding: 100px;
 }
 
@@ -98,7 +99,7 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(calc(1px - 50%), -50%);
     background-color: #E6ECFB;
     width: var(--content-width);
     height: var(--content-height);
@@ -144,6 +145,16 @@ html, body {
     transform: translate(-50%, -50%);
     z-index: 2;
     height: var(--content-height);
+}
+
+#text {
+    position: absolute;
+    top: 369px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 3;
+    width: var(--text-width);
+    transition: opacity ease-in-out 1s;
 }
 
 #status-bar {
