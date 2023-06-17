@@ -142,7 +142,7 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(calc(-50% - 15px), -50%);
+    transform: translate(calc(-50% - 12px), -50%);
     z-index: 2;
     height: var(--content-height);
 }
